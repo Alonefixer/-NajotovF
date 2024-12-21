@@ -6,113 +6,88 @@
   <title>Crypto Clicker</title>
   <style>
     body {
-      background-color: #000; /* Чёрный фон */
+      background-color: #000;
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
       color: white;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
       user-select: none;
-      -webkit-user-select: none;
     }
 
     .container {
       text-align: center;
-      max-width: 100%;
-      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .crypto {
-      width: 300px; /* Увеличенный размер изображения */
-      height: 300px;
+      width: 250px;
+      height: 250px;
       border-radius: 50%;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
+      background-color: #000;
+      background-image: url('assets/Crypto.jpg');
+      background-size: 160%;
+      background-position: center;
+      box-shadow: 0 15px 50px rgba(255, 255, 255, 0.2);
+      animation: pulse 1.5s infinite ease-in-out;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background-color: #000; /* Чёрный фон кнопки */
-      background-image: url('assets/Crypto.jpg');
-      background-size: 130%; /* Увеличенный масштаб изображения */
-      background-position: center;
-      animation: cryptoAnimation 2s infinite ease-in-out;
+      margin-bottom: 15px;
     }
 
-    @keyframes cryptoAnimation {
-      0% {
+    @keyframes pulse {
+      0%, 100% {
         transform: scale(1);
       }
       50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
+        transform: scale(1.15);
       }
     }
 
     .crypto:hover {
-      transform: scale(1.2); /* Увеличение при наведении */
-      box-shadow: 0 15px 60px rgba(0, 0, 0, 0.8);
+      transform: scale(1.2);
+      box-shadow: 0 20px 60px rgba(255, 255, 255, 0.5);
     }
 
     .counter {
-      margin-top: 30px;
-      font-size: 42px;
+      font-size: 30px;
       font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-      transition: transform 0.3s ease;
-    }
-
-    .counter:hover {
-      transform: scale(1.1);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      margin-bottom: 10px;
     }
 
     .footer {
-      margin-top: 30px;
       font-size: 14px;
       color: #aaa;
-      font-style: italic;
-      letter-spacing: 1px;
+      text-align: center;
+      margin-top: 10px;
     }
 
     .footer a {
-      color: #aaa;
+      color: #f1c40f;
       text-decoration: none;
-      transition: color 0.3s ease;
     }
 
     .footer a:hover {
-      color: #f1c40f;
-    }
-
-    @media (max-width: 600px) {
-      .crypto {
-        width: 240px; /* Размер для мобильных устройств */
-        height: 240px;
-        background-size: 140%; /* Ещё ближе */
-      }
-
-      .counter {
-        font-size: 36px;
-      }
+      text-decoration: underline;
     }
 
     @media (max-width: 400px) {
       .crypto {
-        width: 200px;
-        height: 200px;
-        background-size: 150%; /* Максимально приближено для маленьких экранов */
+        width: 180px;
+        height: 180px;
+        background-size: 180%;
       }
 
       .counter {
-        font-size: 32px;
+        font-size: 24px;
       }
     }
   </style>
@@ -123,26 +98,22 @@
     <div class="crypto" id="crypto"></div>
     <div class="counter" id="counter">Crypto: 0</div>
     <div class="footer">
-      By <a href="#">kriptosum_tapbot</a>
+      By <a href="https://t.me/kriptosum_tapbot" target="_blank">kriptosum_tapbot</a>
     </div>
   </div>
 
   <script>
-    // Получаем сохраненное значение счётчика из localStorage
+    // Счётчик
     let counter = parseInt(localStorage.getItem('counter')) || 0;
-
-    // Обновляем отображение счётчика
     const counterDisplay = document.getElementById('counter');
     counterDisplay.textContent = `Crypto: ${counter}`;
 
     const crypto = document.getElementById('crypto');
 
-    // Слушаем событие клика на изображении
+    // Обновление счётчика
     crypto.addEventListener('click', () => {
       counter++;
       counterDisplay.textContent = `Crypto: ${counter}`;
-
-      // Сохраняем новое значение счётчика в localStorage
       localStorage.setItem('counter', counter);
     });
   </script>
