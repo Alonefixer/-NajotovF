@@ -92,7 +92,7 @@
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
 
   <div class="container">
     <div class="crypto" id="crypto"></div>
@@ -103,6 +103,13 @@
   </div>
 
   <script>
+    // Запрет клавишных комбинаций для копирования
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'u')) || e.key === 'PrintScreen') {
+        e.preventDefault();
+      }
+    });
+
     // Счётчик
     let counter = parseInt(localStorage.getItem('counter')) || 0;
     const counterDisplay = document.getElementById('counter');
